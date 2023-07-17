@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <title>Contact Us</title>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+        <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+      </head>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/media.css">
+</head>
+
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1B2C3C;
+
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    margin-top: 9px;
+    padding: 4.3rem 8rem;
+}
+
+.main {
+    width: 100%;
+    background: url(/images/image.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+
+}
+
+.logo img {
+    width: 8vw;
+    margin-left: 8rem;
+    margin-top: 38px;
+}
+
+.header {
+    position: fixed;
+    top: -50px;
+    left: -160px;
+    margin-top: 1rem;
+    width: 115%;
+    height: 98px;
+    padding: 1rem 9%;
+    background: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background-color: #1B2C3C;
+    box-shadow: 2px 3px 5px rgb(53, 45, 45);
+}
+
+.header .sticky {
+    border-bottom: .1rem solid rgba(0, 0, 0, .2);
+}
+
+.navbar li {
+    display: inline-block;
+    margin-top: 30px;
+
+}
+
+.navbar a {
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-color);
+    transition: 0.4s;
+    color: #fff;
+    padding: 1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+
+}
+
+.navbar a:hover,
+.navbar a.active {
+
+    color: #FF5B00;
+    text-decoration: underline;
+
+}
+
+.heading {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    transform: translate(-50%, -505);
+    color: #fff;
+}
+
+.heading h1 {
+    font-size: 4.2rem;
+    margin-bottom: 12px;
+    letter-spacing: 0px;
+    text-shadow: 7px 7px 5px #000000BF;
+    opacity: 1;
+}
+
+.heading h2 {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    letter-spacing: 0px;
+    text-shadow: 7px 7px 5px #000000BF;
+    opacity: 1;
+}
+
+.heading h3 {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    letter-spacing: 0px;
+    text-shadow: 7px 7px 5px #000000BF;
+    opacity: 1;
+}
+
+span {
+    color: #FF5B00;
+}
+
+/* icons */
+
+.icons {
+    display: block;
+    margin-top: 1.8rem;
+}
+
+.icons ul {
+    display: flex;
+
+}
+
+.icons ul li {
+    list-style: none;
+    margin: 0 10px;
+}
+
+.icons ul li a {
+    position: relative;
+    display: block;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    color: #4e4040;
+    transition: .4s;
+    font-size: 1.3rem;
+
+}
+
+.icons ul li a:hover {
+    background-color: #FF5B00;
+    color: #fff;
+    box-shadow: 1px 1px 20px #FF5B00;
+}
+
+/* about */
+.main2 {
+    width: 100%;
+    background: url(/images/image2.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.about {
+    display: flex;
+    justify-content: end;
+
+
+}
+
+.about-heading {
+    color: #fff;
+    margin-right: 20rem;
+    text-shadow: 7px 7px 5px #000000BF;
+
+}
+
+.about-heading h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.about-heading p {
+    position: absolute;
+    top: 49rem;
+    font-size: 1.4rem;
+
+}
+
+/* service */
+
+.main3 {
+    width: 100%;
+    background: url(/images/image3.jpg);
+    background: url(/images/image3.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 150vh;
+}
+
+.service-container {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    margin-top: 8rem;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+
+
+}
+
+
+.service-heading {
+    position: absolute;
+    top: 220%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-shadow: 7px 7px 5px #000000BF;
+
+}
+
+.service-heading h2 {
+    color: #fff;
+    font-size: 2rem;
+}
+
+.service-heading .line {
+    border-left: 2px solid red;
+
+}
+
+.service-heading h1 {
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.service-container .service-content {
+    flex: 1 1 30rem;
+    color: #fff;
+    background-color: #858687;
+    padding: 2rem 1rem 3rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    transition: .4s ease-in-out;
+    box-shadow: 7px 7px 5px #000000BF;
+
+}
+
+.service-container .service-content:hover {
+    background-color: #1B2C3C;
+}
+
+.service-content h2 {
+    margin-bottom: 13rem;
+
+}
+
+.service-content p {
+    margin-top: -170px;
+
+}
+
+.service-content .btn {
+    margin-top: 33px;
+    background-color: rgb(255, 234, 234);
+    padding: .4rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    transition: .4s ease-in-out;
+    font-size: 15px;
+    cursor: pointer;
+
+
+}
+
+.service-content .btn:hover {
+    color: #fff;
+    background-color: #FF5B00;
+
+}
+
+.main4 {
+    width: 100%;
+    background: url(/images/image3.jpg);
+    background: url(/images/image3.jpg);
+    background-position: center;
+    background-size: cover;
+    height: auto;
+}
+
+.portfolio-heading {
+    text-align: center;
+    text-shadow: 7px 7px 5px #000000BF;
+}
+
+.portfolio-heading h1 {
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.portfolio-heading h2 {
+    color: #fff;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.portfolio-heading p {
+    color: #fff;
+    margin-bottom: 4rem;
+}
+
+/* gallary */
+
+.container {
+    padding: 20px;
+    width: 1280px;
+    margin: 40px auto;
+}
+
+.container ul {
+    display: flex;
+    margin-top: -11rem;
+    margin-left: 14rem;
+    margin-bottom: 10px;
+}
+
+.container ul li {
+    list-style: none;
+    background-color: pink;
+    border-radius: 10px;
+    padding: 8px 20px;
+    margin: 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .4s ease;
+
+}
+
+.container ul li.active {
+    background-color: #FF5B00;
+}
+
+.product {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 4rem;
+}
+
+.product .itemBox {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+
+
+
+}
+
+/* this is for making all imh width and height equally */
+.product .itemBox img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2rem;
+    transition: .4s ease;
+}
+
+.product .itemBox img:hover {
+    box-shadow: 0px 0px 1rem rgb(238, 97, 97);
+
+}
+
+/* contact */
+
+.main5 {
+    width: 100%;
+    background: url(/images/image3.jpg);
+    background-position: center;
+    background-size: cover;
+    height: auto;
+    margin-top: 2rem;
+
+
+}
+
+.contact-heading {
+    text-align: center;
+    text-shadow: 7px 7px 5px #000000BF;
+    color: #fff;
+}
+
+.contact-heading h1 {
+    color: #fff;
+    margin-bottom: 10px;
+    text-shadow: 7px 7px 5px #000000BF;
+    word-spacing: 4px;
+
+
+}
+
+.contact-heading h2 {
+    color: #fff;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-shadow: 7px 7px 5px #000000BF;
+
+}
+
+.contact ul {
+    display: flex;
+    margin: 20px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+
+}
+
+.contact ul li {
+    padding: 11px;
+    list-style: none;
+    font-size: 13px;
+    text-shadow: 7px 7px 5px #000000BF;
+
+}
+
+.contact ul li i {
+    margin-top: 4px;
+    margin-right: -10px;
+    color: #FF5B00;
+    font-size: 30px;
+    text-shadow: 7px 7px 5px #000000BF;
+}
+
+.contact-container {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+}
+
+.contact-in {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px #666;
+}
+
+.contact-map {
+    width: 100%;
+    height: auto;
+    flex: 50%;
+}
+.contact-map iframe {
+    width: 100%;
+    height: 100%;
+   
+}
+
+.contact-form {
+    width: 100%;
+    height: auto;
+    padding: 40px;
+    flex: 50%;
+    text-align: center;
+}
+
+.contact-form h1 {
+    margin-bottom: 10px;
+
+}
+
+.contact-form-txt {
+    width: 100%;
+    height: 40px;
+    color: #000;
+    outline: none;
+    border: none;
+    background-color: rgb(181, 178, 178);
+    color: #1B2C3C;
+    font-size: 15px;
+    border-radius: 20px;
+    outline: none;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.contact-form-txt::placeholder {
+    color: #1B2C3C;
+}
+
+.contact-form-textarea {
+    width: 100%;
+    height: 130px;
+    color: #000;
+    background-color: rgb(181, 178, 178);
+    border-radius: 17px;
+    outline: none;
+    margin-bottom: 20px;
+    padding: 15px;
+    resize: none;
+}
+
+.contact-form-textarea::placeholder {
+    color: #1B2C3C;
+
+}
+
+.contact-form-btn{
+    width: 40%;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    background-color: #FF5B00;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: .4s;
+
+
+}
+
+.contact-form-btn:hover{
+    background-color: #FF5B00;
+    color: #fff;
+    box-shadow: 1px 1px 20px #FF5B00;
+}
+
+
+</style>
+
+
+<body>
+   
+
+
+    <div class="main" id="main">
+        <section>
+
+            <header class="header">
+                <li><a href="#" class="logo"><img src=></a></li>
+
+                <nav class="navbar">
+                    <li><a href="#main" class="active">Home </a></li>
+                    <li><a href="#main2">About</a></li>
+                    <li><a href="#main3">Service</a></li>
+                    <li><a href="#main4">Portfolio</a></li>
+                    <li> <a href="#main5">Contact Us</a></li>
+                </nav>
+            </header>
+
+            <section class="home">
+                <div class="heading">
+                    <h1>HII! I’M <span>HARSH PATKAR </span></h1>
+                    <h2>FRONTEND AND BACKEND DEVELOPER</h2>
+                    <h3>START <span>TODAY</span></h3>
+
+                    <div class="icons">
+                        <ul>
+                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                            <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
+                            <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
+                            <li><a href=""><i class="fa-brands fa-youtube"></i></a></li>
+                            <li><a href=""><i class="fa-brands fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+    </div>
+    </section>
+
+    <div class="main2" id="main2">
+        <section class="about">
+            <div class="about-heading">
+                <h2>About <span>Me</span></h2>
+                <h1>FRONTEND AND BACKEND DEVELOPER</h1>
+                <p>Hello Myself Harsh Patkar ! <br>  I proudly introduce myself as a frontend and backend developer. I am passionate about creating innovative and user-friendly web applications that seamlessly blend aesthetics with functionality.
+
+                    On the frontend side, I specialize in crafting engaging user interfaces that captivate and delight users. With my expertise in HTML, CSS, and JavaScript, I bring designs to life, ensuring an intuitive and responsive experience across various devices. I am well-versed in popular frontend frameworks like React, Angular, or Vue.js, allowing me to build dynamic and interactive web pages that leave a lasting impression.
+                    
+                    In the realm of backend development, I thrive on designing and implementing the server-side logic that powers web applications. I have a strong command of programming languages such as Python, Ruby, Java, or JavaScript (Node.js) and utilize frameworks like Django, Ruby on Rails, Spring, or Express.js to streamline development processes. From managing databases and handling user authentication to processing data and building robust APIs, I enjoy solving complex challenges behind the scenes to ensure seamless functionality and data integrity.</span></p>
+            </div>
+        </section>
+    </div>
+
+    <div class="main3" id="main3">
+        <section class="services">
+            <div class="service-heading">
+                <h2>MY <span>SERVICES</span></h2>
+                <!-- <div class="line"></div> -->
+                <h1>SPECIALIZE IN</h1>
+                <!-- <div class="line2"></div> -->
+            </div>
+
+            <div class="service-container">
+                <div class="service-content">
+                    <h2> Branding</h2>
+                    <p>Graphics Designing | Logo Designing | Visiting Cards Designing |Letterhead Designing...</p>
+                    <button class="btn">Read More</button>
+                </div>
+                <div class="service-content">
+                    <h2>Social Media / Digital Promotion - Design</h2>
+                    <p>Social Media Post/Images |<br> Social Media Ads | Creatives |<br> WhatsApp Posts....</p>
+                    <button class="btn">Read More</button>
+                </div>
+                <div class="service-content">
+                    <h2>Printing</h2>
+                    <p>Brochures Designing | Catalogue Designing | Leaflet – Flyer – Pamphlet Designing | Visiting Cards
+                        Designing...</p>
+                    <button class="btn">Read More</button>
+                </div>
+                <div class="service-content">
+                    <h2>Digital Marketing</h2>
+                    <p>Graphics Designing | Web and Email Marketing | Social Media Marketing | Promotion and
+                        Marketing...</p>
+                    <button class="btn">Read More</button>
+                </div>
+                <div class="service-content">
+                    <h2>Website Design</h2>
+                    <p>Web Design and Development | Ecommerce Website Development | Responsive Web Design....</p>
+                    <button class="btn">Read More</button>
+                </div>
+                <div class="service-content">
+                    <h2>Other</h2>
+                    <p>Powerpoint and keynote design, Gift Certificates, Name Tags, Tank Card etc.</p>
+                    <button class="btn">Read More</button>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <div class="main4" id="main4">
+        <section class="portfolio">
+            <div class="portfolio-heading">
+                <h1>MY <span>PORTFOLIO</span></h1>
+                <h2>WHAT I DO</h2>
+                <p>A creative designer that believes in the power of creative ideas and great design. I Developing
+                    concepts and artwork, creating graphic design solutions from concept trough completion, some of
+                    which are in my Portfolio/Artwork.</p>
+            </div>
+        </section>
+
+
+        <div class="container">
+            <ul>
+                <li class="list active" data-filter="All">All</li>
+                <li class="list" data-filter="graphic-design">Graphic Design</li>
+                <li class="list" data-filter="mockup">Mockup</li>
+                <li class="list" data-filter="web-designs">Website Design</li>
+                <li class="list" data-filter="editor">Editor</li>
+            </ul>
+            <div class="product">
+
+                <div class="itemBox graphic-design"><img src="/images/graphic/11400313_4760250.jpg" alt=""
+                        width="300px"></div>
+                <div class="itemBox mockup"><img src="/images/mocukps/blogger-2838945_1920.jpg" alt="" width="300px">
+                </div>
+               
+                <div class="itemBox web-designs"><img src="/images/web/ball-63527_640.jpg" alt="" width="300px"></div>
+                <div class="itemBox editor"><img src="/images/editing/heaven-3238050_640.jpg" alt="" width="300px">
+                </div>
+
+                <div class="itemBox graphic-design"><img src="/images/graphic/11400313_4760250.jpg" alt=""
+                        width="300px"></div>
+                <div class="itemBox mockup"><img src="/images/mocukps/blogger-2838945_1920.jpg" alt="" width="300px">
+                </div>
+               
+                <div class="itemBox web-designs"><img src="/images/web/ball-63527_640.jpg" alt="" width="300px"></div>
+                <div class="itemBox editor"><img src="/images/editing/heaven-3238050_640.jpg" alt="" width="300px">
+                </div>
+
+                <div class="itemBox graphic-design"><img src="/images/graphic/11400313_4760250.jpg" alt=""
+                        width="300px"></div>
+                <div class="itemBox mockup"><img src="/images/mocukps/blogger-2838945_1920.jpg" alt="" width="300px">
+                </div>
+                
+                <div class="itemBox web-designs"><img src="/images/web/ball-63527_640.jpg" alt="" width="300px"></div>
+                <div class="itemBox editor"><img src="/images/editing/heaven-3238050_640.jpg" alt="" width="300px">
+                </div>
+
+                <div class="itemBox graphic-design"><img src="/images/graphic/11400313_4760250.jpg" alt=""
+                        width="300px"></div>
+                <div class="itemBox mockup"><img src="/images/mocukps/blogger-2838945_1920.jpg" alt="" width="300px">
+                </div>
+               
+                <div class="itemBox web-designs"><img src="/images/web/ball-63527_640.jpg" alt="" width="300px"></div>
+                <div class="itemBox editor"><img src="/images/editing/heaven-3238050_640.jpg" alt="" width="300px">
+                </div>
+
+
+
+            </div>
+        </div>
+        <!-- </div> -->
+
+        <div class="main5" id="main5">
+            <section class="contact">
+                <div class="contact-heading">
+
+                    <h1>CONTACT <span>ME</span></h1>
+                    <h2>GET IN TOUCH</h2>
+                </div>
+                <ul>
+                    <li> <i class="fa-solid fa-phone"></i></li>
+                    <li>
+                        <h2>+91 8080546321</h2>
+                    </li>
+                    <li> <i class="fa-solid fa-location-dot"></i></li>
+                    <li>
+                        <h2>Bhiwandi, Dist - Thane (MH)</h2>
+                    </li>
+                    <li> <i class="fa-solid fa-envelope"></i></li>
+                    <li>
+                        <h2>harshpatkar143@gmail.com</h2>
+                    </li>
+
+                </ul>
+                <div class="contact-container">
+                    <div class="contact-in">
+                        <div class="contact-map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.1100378265783!2d73.0648406741213!3d19.321030844236635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7bd58cd6bf927%3A0x788c750ce1f5214a!2sOmi%20Photography!5e0!3m2!1sen!2sin!4v1682623245634!5m2!1sen!2sin" width="100%" height="auto" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                      
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.6.4.js"
+            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.list').click(function () {
+                    const value = $(this).attr('data-filter');
+                    if (value == 'All') {
+                        $('.itemBox').show('1000');
+                    }
+                    else {
+                        $('.itemBox').not('.' + value).hide('1000');
+                        $('.itemBox').filter('.' + value).show('1000');
+                    }
+                })
+
+                // add active class on selected item
+                $('.list').click(function () {
+                    $(this).addClass('active').siblings().removeClass('active');
+                })
+            })
+
+        </script>
+</body>
+
+</html>
